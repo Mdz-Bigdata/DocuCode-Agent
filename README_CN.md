@@ -15,10 +15,6 @@ limitations under the License.
 -->
 
 中文 ｜ [English](README.md)
-
-<p align="center">
-    <img src="https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/logo_qwen_agent.png" width="400"/>
-<p>
 <br>
 
 <p align="center">
