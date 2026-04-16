@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技能包管理 - DocuCode Agent Ultimate</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1>DocuCode Agent</h1>
+                    <span class="ultimate-badge">ULTIMATE</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="/" class="nav-item" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>主控制台</span>
+                </a>
+                <a href="/api/customer-service" class="nav-item" data-page="customer">
+                    <i class="fas fa-headset"></i>
+                    <span>智能客服</span>
+                </a>
+                <a href="/api/rag" class="nav-item" data-page="rag">
+                    <i class="fas fa-database"></i>
+                    <span>RAG 知识库</span>
+                </a>
+                <a href="/api/mcp" class="nav-item" data-page="mcp">
+                    <i class="fas fa-plug"></i>
+                    <span>MCP 工具</span>
+                </a>
+                <a href="/api/skills" class="nav-item active" data-page="skills">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <span>技能管理</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/code-helper" class="nav-item" data-page="code">
+                    <i class="fas fa-code"></i>
+                    <span>代码助手</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="/api/settings" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-dot online"></span>
+                    <span>技能就绪</span>
+                </div>
+                <div class="version-info">v4.0.0</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h2 class="page-title">技能管理</h2>
+                    <p class="page-subtitle">安装和管理您的 AI 技能扩展包</p>
+                </div>
+                <div class="header-right">
+                    <button class="header-btn" id="refreshSkillsBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        刷新
+                    </button>
+                    <div class="dropdown">
+                        <button class="header-btn primary dropdown-toggle" id="installSkillBtn">
+                            <i class="fas fa-plus"></i>
+                            添加技能包
+                        </button>
+                        <div class="dropdown-menu" id="skillDropdownMenu">
+                            <button class="dropdown-item" data-method="zip">
+                                <i class="fas fa-file-archive"></i>
+                                上传 .zip
+                            </button>
+                            <button class="dropdown-item" data-method="folder">
+                                <i class="fas fa-folder"></i>
+                                上传文件夹
+                            </button>
+                            <button class="dropdown-item" data-method="github">
+                                <i class="fab fa-github"></i>
+                                从 GitHub 导入
+                            </button>
+                            <button class="dropdown-item active" data-method="json">
+                                <i class="fas fa-code"></i>
+                                JSON 配置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="mcp-stats">
+                    <div class="mcp-stat-card">
+                        <div class="mcp-stat-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <div class="mcp-stat-info">
+                            <h3 id="totalSkills">4</h3>
+                            <p>可用技能</p>
+                        </div>
+                    </div>
+                    <div class="mcp-stat-card">
+                        <div class="mcp-stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="mcp-stat-info">
+                            <h3 id="installedSkills">2</h3>
+                            <p>已安装</p>
+                        </div>
+                    </div>
+                    <div class="mcp-stat-card">
+                        <div class="mcp-stat-icon purple">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="mcp-stat-info">
+                            <h3 id="installCount">0</h3>
+                            <p>安装次数</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mcp-tools-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-th"></i> 技能商店</h3>
+                        <div class="category-filters">
+                            <button class="category-filter active" data-category="all">全部</button>
+                            <button class="category-filter" data-category="办公处理">办公处理</button>
+                            <button class="category-filter" data-category="音频视频">音频视频</button>
+                            <button class="category-filter" data-category="广告文案">广告文案</button>
+                            <button class="category-filter" data-category="SEO优化">SEO优化</button>
+                            <button class="category-filter" data-category="数据分析处理">数据分析处理</button>
+                            <button class="category-filter" data-category="内容创作">内容创作</button>
+                            <button class="category-filter" data-category="教育">教育</button>
+                            <button class="category-filter" data-category="专业服务">专业服务</button>
+                            <button class="category-filter" data-category="自定义">自定义</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tools-grid" id="skillsGrid"></div>
+                </div>
+                
+                <div class="mcp-execution-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-info-circle"></i> 已安装技能详情</h3>
+                    </div>
+                    
+                    <div class="execution-results" id="skillDetails">
+                        <div class="empty-state small">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <p>点击技能查看详情</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mcp-history-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-history"></i> 安装记录</h3>
+                    </div>
+                    
+                    <div class="history-table" id="installHistory">
+                        <div class="empty-state small">
+                            <i class="fas fa-history"></i>
+                            <p>暂无安装记录</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="installSkillModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> 技能管理</h3>
+                <button class="close-btn" id="closeInstallModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="skill-install-form">
+                    <div class="form-group">
+                        <label>输入 JSON Array 格式的技能配置:</label>
+                        <textarea id="skillConfigJson" placeholder='[
+  {
+    "id": "english_translator",
+    "name": "英翻中",
+    "description": "专业的英文翻译至中文助手",
+    "handler_type": "prompt",
+    "config": {
+      "prompt": "你是一个专业的翻译助手，请将用户发送的内容翻译为中文。"
+    }
+  }
+]'></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelInstallBtn">取消</button>
+                <button class="btn-primary" id="confirmInstallBtn">
+                    <i class="fas fa-check"></i>
+                    确定导入
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="skillDetailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-tool-header">
+                    <div class="modal-tool-icon" id="skillDetailIcon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div>
+                        <h3 id="skillDetailName">技能名称</h3>
+                        <p id="skillDetailVersion">版本 1.0.0 · 作者</p>
+                    </div>
+                </div>
+                <button class="close-btn" id="closeSkillDetailModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="skill-detail-content">
+                    <div class="skill-detail-section">
+                        <h4><i class="fas fa-info-circle"></i> 技能描述</h4>
+                        <p id="skillDetailDesc">-</p>
+                    </div>
+                    <div class="skill-detail-section">
+                        <h4><i class="fas fa-tags"></i> 分类</h4>
+                        <span class="skill-category-badge" id="skillDetailCategory">-</span>
+                    </div>
+                    <div class="skill-detail-section" id="skillTagsSection" style="display: none;">
+                        <h4><i class="fas fa-hashtag"></i> 标签</h4>
+                        <div class="skill-tags" id="skillDetailTags" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="skill-detail-section">
+                        <h4><i class="fas fa-calendar"></i> 安装状态</h4>
+                        <span class="skill-status-badge" id="skillDetailStatus">-</span>
+                    </div>
+                </div>
+                <div id="skillResults" class="skill-results" style="display: none; margin-top: 20px;">
+                    <h4><i class="fas fa-lightbulb"></i> 执行结果</h4>
+                    <div class="result-content" id="skillResultContent"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeSkillDetailBtn">关闭</button>
+                <button class="btn-primary" id="useSkillBtn">
+                    <i class="fas fa-play"></i>
+                    使用技能
+                </button>
+                <button class="btn-danger" id="uninstallSkillBtn">
+                    <i class="fas fa-trash"></i>
+                    卸载
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="/static/skills.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能客服 - DocuCode Agent Ultimate</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cs-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .cs-section-header h3 {
+            margin: 0;
+        }
+        
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .model-select {
+            padding: 6px 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        
+        .model-select:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+        }
+        
+        .model-select option {
+            background: #1a1a2e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1>DocuCode Agent</h1>
+                    <span class="ultimate-badge">ULTIMATE</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="/" class="nav-item" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>主控制台</span>
+                </a>
+                <a href="/api/customer-service" class="nav-item active" data-page="customer">
+                    <i class="fas fa-headset"></i>
+                    <span>智能客服</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/rag" class="nav-item" data-page="rag">
+                    <i class="fas fa-database"></i>
+                    <span>RAG 知识库</span>
+                </a>
+                <a href="/api/mcp" class="nav-item" data-page="mcp">
+                    <i class="fas fa-plug"></i>
+                    <span>MCP 工具</span>
+                </a>
+                <a href="/api/skills" class="nav-item" data-page="skills">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <span>技能管理</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/code-helper" class="nav-item" data-page="code">
+                    <i class="fas fa-code"></i>
+                    <span>代码助手</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="/api/settings" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-dot online"></span>
+                    <span>客服在线</span>
+                </div>
+                <div class="version-info">v4.0.0</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h2 class="page-title">智能客服</h2>
+                    <p class="page-subtitle">7x24小时专业客服为您服务</p>
+                </div>
+                <div class="header-right">
+                    <div class="cs-stats">
+                        <div class="cs-stat">
+                            <span class="cs-stat-icon"><i class="fas fa-comments"></i></span>
+                            <div>
+                                <strong>156</strong>
+                                <span>今日对话</span>
+                            </div>
+                        </div>
+                        <div class="cs-stat">
+                            <span class="cs-stat-icon"><i class="fas fa-smile"></i></span>
+                            <div>
+                                <strong>98%</strong>
+                                <span>满意度</span>
+                            </div>
+                        </div>
+                        <div class="cs-stat">
+                            <span class="cs-stat-icon"><i class="fas fa-clock"></i></span>
+                            <div>
+                                <strong>&lt;1s</strong>
+                                <span>平均响应</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="cs-container">
+                    <div class="cs-sidebar">
+                        <div class="cs-section">
+                            <div class="cs-section-header">
+                                <h3><i class="fas fa-lightbulb"></i> 常见问题</h3>
+                                <button class="clear-btn" id="clearFaqBtn" title="清除常见问题">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="faq-list" id="faqList">
+                                <button class="faq-item" data-question="如何注册账号？">
+                                    <i class="fas fa-user-plus"></i>
+                                    如何注册账号？
+                                </button>
+                                <button class="faq-item" data-question="忘记密码怎么办？">
+                                    <i class="fas fa-key"></i>
+                                    忘记密码怎么办？
+                                </button>
+                                <button class="faq-item" data-question="如何修改个人信息？">
+                                    <i class="fas fa-edit"></i>
+                                    如何修改个人信息？
+                                </button>
+                                <button class="faq-item" data-question="订单如何取消？">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    订单如何取消？
+                                </button>
+                                <button class="faq-item" data-question="退款政策是什么？">
+                                    <i class="fas fa-undo"></i>
+                                    退款政策是什么？
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="cs-section">
+                            <div class="cs-section-header">
+                                <h3><i class="fas fa-history"></i> 历史对话</h3>
+                                <button class="clear-btn" id="clearHistoryBtn" title="清除历史对话">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="history-list" id="historyList">
+                                <div class="history-item">
+                                    <div class="history-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="history-info">
+                                        <h4>关于产品咨询</h4>
+                                        <p>今天 10:30</p>
+                                    </div>
+                                </div>
+                                <div class="history-item">
+                                    <div class="history-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="history-info">
+                                        <h4>技术支持</h4>
+                                        <p>昨天 15:20</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cs-chat-area">
+                        <div class="cs-chat-header">
+                            <div class="cs-agent-info">
+                                <div class="cs-agent-avatar">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="cs-agent-details">
+                                    <h3>小智客服</h3>
+                                    <span class="cs-status online">
+                                        <span class="cs-status-dot"></span>
+                                        在线服务中
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="cs-chat-actions">
+                                <div class="cs-model-selector">
+                                <select id="modelSelector" class="model-select">
+                                    <option value="local">本地 Qwen (transformers)</option>
+                                    <option value="dashscope">阿里云 DashScope</option>
+                                </select>
+                            </div>
+                                <button class="icon-btn" title="满意度评价">
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                <button class="icon-btn" title="转人工">
+                                    <i class="fas fa-phone"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="cs-messages" id="csMessages">
+                            <div class="cs-message assistant">
+                                <div class="cs-message-avatar">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="cs-message-content">
+                                    <div class="cs-message-bubble">
+                                        <p>您好！欢迎使用智能客服服务！😊</p>
+                                        <p>我是小智，很高兴为您服务。请问有什么可以帮助您的吗？</p>
+                                    </div>
+                                    <div class="cs-message-time">刚刚</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cs-input-area">
+                            <div class="cs-input-tools">
+                                <button class="tool-btn" title="表情">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                                <button class="tool-btn" title="图片">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <button class="tool-btn" title="附件">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                            </div>
+                            <div class="cs-input-wrapper">
+                                <textarea id="csInput" placeholder="请输入您的问题... (Shift+Enter 换行)" rows="1"></textarea>
+                                <button class="cs-send-btn" id="csSendBtn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    发送
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="/static/customer_service.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuCode Agent Ultimate - 主控制台</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1>DocuCode Agent</h1>
+                    <span class="ultimate-badge">ULTIMATE</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="/" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>主控制台</span>
+                </a>
+                <a href="/api/customer-service" class="nav-item" data-page="customer">
+                    <i class="fas fa-headset"></i>
+                    <span>智能客服</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/rag" class="nav-item" data-page="rag">
+                    <i class="fas fa-database"></i>
+                    <span>RAG 知识库</span>
+                </a>
+                <a href="/api/mcp" class="nav-item" data-page="mcp">
+                    <i class="fas fa-plug"></i>
+                    <span>MCP 工具</span>
+                </a>
+                <a href="/api/skills" class="nav-item" data-page="skills">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <span>技能管理</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/code-helper" class="nav-item" data-page="code">
+                    <i class="fas fa-code"></i>
+                    <span>代码助手</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="/api/settings" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-dot online"></span>
+                    <span>系统正常</span>
+                </div>
+                <div class="version-info">v4.0.0</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h2 class="page-title">主控制台</h2>
+                    <p class="page-subtitle">欢迎使用 DocuCode Agent Ultimate 终极版</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="搜索功能...">
+                    </div>
+                    <button class="header-btn" id="quickChatBtn">
+                        <i class="fas fa-comment"></i>
+                        快速对话
+                    </button>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">1,234</h3>
+                            <p class="stat-label">对话次数</p>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i> 12%
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="docCount">0</h3>
+                            <p class="stat-label">知识库文档</p>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i> 5%
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">6</h3>
+                            <p class="stat-label">MCP 工具</p>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-minus"></i> 0%
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">3</h3>
+                            <p class="stat-label">可用智能体</p>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i> 0%
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card quick-start">
+                        <div class="card-header">
+                            <h3><i class="fas fa-rocket"></i> 快速开始</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="quick-actions">
+                                <a href="/api/customer-service" class="quick-action">
+                                    <div class="action-icon"><i class="fas fa-headset"></i></div>
+                                    <span>启动智能客服</span>
+                                </a>
+                                <a href="/api/rag" class="quick-action">
+                                    <div class="action-icon"><i class="fas fa-database"></i></div>
+                                    <span>管理知识库</span>
+                                </a>
+                                <a href="/api/mcp" class="quick-action">
+                                    <div class="action-icon"><i class="fas fa-plug"></i></div>
+                                    <span>使用 MCP 工具</span>
+                                </a>
+                                <a href="/api/code-helper" class="quick-action">
+                                    <div class="action-icon"><i class="fas fa-code"></i></div>
+                                    <span>代码助手</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card recent-activity">
+                        <div class="card-header">
+                            <h3><i class="fas fa-history"></i> 最近活动</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-list" id="activityList">
+                                <div class="activity-item" data-id="1">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-comment"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>完成了一次对话</h4>
+                                        <p>使用代码助手 · 刚刚</p>
+                                    </div>
+                                    <button class="activity-delete-btn" onclick="deleteActivity(1)" title="删除">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="activity-item" data-id="2">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-file-upload"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>上传了文档</h4>
+                                        <p>产品手册.pdf · 5分钟前</p>
+                                    </div>
+                                    <button class="activity-delete-btn" onclick="deleteActivity(2)" title="删除">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="activity-item" data-id="3">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    <div class="activity-info">
+                                        <h4>使用了 MCP 工具</h4>
+                                        <p>计算器 · 10分钟前</p>
+                                    </div>
+                                    <button class="activity-delete-btn" onclick="deleteActivity(3)" title="删除">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card features-overview">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> 功能概览</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="feature-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h4>多智能体</h4>
+                                <p>全能助手、智能客服、代码助手</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h4>RAG 检索</h4>
+                                <p>知识库文档管理和智能检索</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <h4>MCP 工具</h4>
+                                <p>计算器、天气、翻译、搜索等</p>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <h4>流式对话</h4>
+                                <p>实时 WebSocket 流式响应</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="quickChatModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3><i class="fas fa-comment"></i> 快速对话</h3>
+                <button class="close-btn" id="closeQuickChatBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="quick-chat-messages" id="quickChatMessages">
+                    <div class="quick-chat-welcome">
+                        <i class="fas fa-hand-sparkles"></i>
+                        <p>有什么我可以帮您的吗？</p>
+                    </div>
+                </div>
+                <div class="quick-chat-input">
+                    <input type="text" id="quickChatInput" placeholder="输入您的问题...">
+                    <button class="send-btn" id="quickChatSendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

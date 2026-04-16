@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置 - DocuCode Agent Ultimate</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1>DocuCode Agent</h1>
+                    <span class="ultimate-badge">ULTIMATE</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="/" class="nav-item" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>主控制台</span>
+                </a>
+                <a href="/api/customer-service" class="nav-item" data-page="customer">
+                    <i class="fas fa-headset"></i>
+                    <span>智能客服</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/rag" class="nav-item" data-page="rag">
+                    <i class="fas fa-database"></i>
+                    <span>RAG 知识库</span>
+                </a>
+                <a href="/api/mcp" class="nav-item" data-page="mcp">
+                    <i class="fas fa-plug"></i>
+                    <span>MCP 工具</span>
+                </a>
+                <a href="/api/skills" class="nav-item" data-page="skills">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <span>技能管理</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/code-helper" class="nav-item" data-page="code">
+                    <i class="fas fa-code"></i>
+                    <span>代码助手</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="/api/settings" class="nav-item active" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-dot online"></span>
+                    <span>系统正常</span>
+                </div>
+                <div class="version-info">v4.0.0</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h2 class="page-title">设置</h2>
+                    <p class="page-subtitle">配置您的 DocuCode Agent Ultimate</p>
+                </div>
+                <div class="header-right">
+                    <button class="header-btn" id="resetSettingsBtn">
+                        <i class="fas fa-undo"></i>
+                        重置设置
+                    </button>
+                    <button class="header-btn primary" id="saveSettingsBtn">
+                        <i class="fas fa-save"></i>
+                        保存设置
+                    </button>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="settings-container">
+                    <div class="settings-nav">
+                        <button class="settings-nav-item active" data-section="general">
+                            <i class="fas fa-sliders-h"></i>
+                            通用设置
+                        </button>
+                        <button class="settings-nav-item" data-section="model">
+                            <i class="fas fa-robot"></i>
+                            模型设置
+                        </button>
+                        <button class="settings-nav-item" data-section="appearance">
+                            <i class="fas fa-palette"></i>
+                            外观设置
+                        </button>
+                        <button class="settings-nav-item" data-section="advanced">
+                            <i class="fas fa-cogs"></i>
+                            高级设置
+                        </button>
+                        <button class="settings-nav-item" data-section="about">
+                            <i class="fas fa-info-circle"></i>
+                            关于
+                        </button>
+                    </div>
+                    
+                    <div class="settings-content">
+                        <div class="settings-section active" id="generalSection">
+                            <div class="settings-group">
+                                <h3><i class="fas fa-language"></i> 语言与区域</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>界面语言</h4>
+                                        <p>选择您偏好的界面语言</p>
+                                    </div>
+                                    <select class="setting-select" id="languageSelect">
+                                        <option value="zh-CN">简体中文</option>
+                                        <option value="en">English</option>
+                                        <option value="ja">日本語</option>
+                                    </select>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>时区</h4>
+                                        <p>设置您所在的时区</p>
+                                    </div>
+                                    <select class="setting-select" id="timezoneSelect">
+                                        <option value="Asia/Shanghai">Asia/Shanghai (UTC+8)</option>
+                                        <option value="America/New_York">America/New_York (UTC-5)</option>
+                                        <option value="Europe/London">Europe/London (UTC+0)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-group">
+                                <h3><i class="fas fa-bell"></i> 通知</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>桌面通知</h4>
+                                        <p>接收桌面通知</p>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="notificationsToggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>声音提示</h4>
+                                        <p>播放通知声音</p>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="soundToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section" id="modelSection">
+                            <div class="settings-group">
+                                <h3><i class="fas fa-brain"></i> 模型服务</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>服务提供商</h4>
+                                        <p>选择模型服务的提供商</p>
+                                    </div>
+                                    <select class="setting-select" id="modelProviderSelect">
+                                        <option value="dashscope">阿里云 DashScope (推荐)</option>
+                                        <option value="local">本地部署 OpenAI 兼容</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-group" id="dashscopeGroup">
+                                <h3><i class="fas fa-cloud"></i> DashScope 配置</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>API Key</h4>
+                                        <p>您的 DashScope API 密钥</p>
+                                    </div>
+                                    <input type="password" class="setting-input" id="dashscopeApiKey" placeholder="sk-...">
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>模型</h4>
+                                        <p>选择使用的 Qwen 模型</p>
+                                    </div>
+                                    <select class="setting-select" id="dashscopeModelSelect">
+                                        <option value="qwen-max">Qwen-Max (推荐)</option>
+                                        <option value="qwen-plus">Qwen-Plus</option>
+                                        <option value="qwen-turbo">Qwen-Turbo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-group" id="localModelGroup" style="display: none;">
+                                <h3><i class="fas fa-server"></i> 本地模型配置</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>API 基础地址</h4>
+                                        <p>您本地部署的 API 服务地址 (OpenAI 兼容)</p>
+                                    </div>
+                                    <input type="text" class="setting-input" id="localApiBase" placeholder="http://localhost:8001/v1">
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>模型名称</h4>
+                                        <p>部署的模型名称</p>
+                                    </div>
+                                    <input type="text" class="setting-input" id="localModelName" placeholder="Qwen/Qwen2.5-7B-Instruct">
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>API Key (可选)</h4>
+                                        <p>如果您的服务需要认证</p>
+                                    </div>
+                                    <input type="password" class="setting-input" id="localApiKey" placeholder="可选，如需要">
+                                </div>
+                            </div>
+                            
+                            <div class="settings-group">
+                                <h3><i class="fas fa-sliders-h"></i> 生成参数</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>温度 (Temperature)</h4>
+                                        <p>控制输出的随机性: <span id="tempValue">0.7</span></p>
+                                    </div>
+                                    <input type="range" class="setting-range" id="tempSlider" min="0" max="1" step="0.1" value="0.7">
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>最大 Token 数</h4>
+                                        <p>设置最大输出长度: <span id="maxTokensValue">2000</span></p>
+                                    </div>
+                                    <input type="range" class="setting-range" id="maxTokensSlider" min="500" max="8000" step="500" value="2000">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section" id="appearanceSection">
+                            <div class="settings-group">
+                                <h3><i class="fas fa-palette"></i> 主题</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>应用主题</h4>
+                                        <p>选择您喜欢的界面主题</p>
+                                    </div>
+                                    <div class="theme-options">
+                                        <button class="theme-option active" data-theme="dark">
+                                            <div class="theme-preview dark"></div>
+                                            <span>深色</span>
+                                        </button>
+                                        <button class="theme-option" data-theme="light">
+                                            <div class="theme-preview light"></div>
+                                            <span>浅色</span>
+                                        </button>
+                                        <button class="theme-option" data-theme="blue">
+                                            <div class="theme-preview blue"></div>
+                                            <span>蓝色</span>
+                                        </button>
+                                        <button class="theme-option" data-theme="purple">
+                                            <div class="theme-preview purple"></div>
+                                            <span>紫色</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-group">
+                                <h3><i class="fas fa-font"></i> 显示</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>字体大小</h4>
+                                        <p>调整界面字体大小</p>
+                                    </div>
+                                    <select class="setting-select" id="fontSizeSelect">
+                                        <option value="small">小</option>
+                                        <option value="medium" selected>中</option>
+                                        <option value="large">大</option>
+                                    </select>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>紧凑模式</h4>
+                                        <p>使用更紧凑的布局</p>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="compactToggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section" id="advancedSection">
+                            <div class="settings-group">
+                                <h3><i class="fas fa-database"></i> 数据管理</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>自动保存</h4>
+                                        <p>自动保存对话历史</p>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="autoSaveToggle" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>清除缓存</h4>
+                                        <p>清除所有缓存数据</p>
+                                    </div>
+                                    <button class="btn-secondary" id="clearCacheBtn">
+                                        <i class="fas fa-broom"></i>
+                                        清除缓存
+                                    </button>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>导出数据</h4>
+                                        <p>导出所有配置和历史</p>
+                                    </div>
+                                    <button class="btn-secondary" id="exportDataBtn">
+                                        <i class="fas fa-file-export"></i>
+                                        导出数据
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-group">
+                                <h3><i class="fas fa-network-wired"></i> 网络</h3>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>API 端点</h4>
+                                        <p>自定义 API 服务器地址</p>
+                                    </div>
+                                    <input type="text" class="setting-input" id="apiEndpoint" value="https://dashscope.aliyuncs.com">
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <h4>代理设置</h4>
+                                        <p>配置网络代理（可选）</p>
+                                    </div>
+                                    <input type="text" class="setting-input" id="proxySetting" placeholder="http://proxy:port">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section" id="aboutSection">
+                            <div class="about-content">
+                                <div class="about-logo">
+                                    <div class="logo-icon-large">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <h1>DocuCode Agent</h1>
+                                    <span class="ultimate-badge large">ULTIMATE</span>
+                                </div>
+                                
+                                <div class="about-info">
+                                    <div class="about-item">
+                                        <span class="about-label">版本</span>
+                                        <span class="about-value">4.0.0</span>
+                                    </div>
+                                    <div class="about-item">
+                                        <span class="about-label">发布日期</span>
+                                        <span class="about-value">2026-04-15</span>
+                                    </div>
+                                    <div class="about-item">
+                                        <span class="about-label">框架</span>
+                                        <span class="about-value">DocuCode Agent</span>
+                                    </div>
+                                    <div class="about-item">
+                                        <span class="about-label">许可证</span>
+                                        <span class="about-value">Apache 2.0</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="about-actions">
+                                    <a href="#" class="about-link">
+                                        <i class="fab fa-github"></i>
+                                        GitHub
+                                    </a>
+                                    <a href="#" class="about-link">
+                                        <i class="fas fa-book"></i>
+                                        文档
+                                    </a>
+                                    <a href="#" class="about-link">
+                                        <i class="fas fa-bug"></i>
+                                        反馈问题
+                                    </a>
+                                </div>
+                                
+                                <div class="about-copyright">
+                                    <p>© 2026 DocuCode Agent Team. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="/static/settings.js"></script>
+</body>
+</html>

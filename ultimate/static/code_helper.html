@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码助手 - DocuCode Agent Ultimate</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1>DocuCode Agent</h1>
+                    <span class="ultimate-badge">ULTIMATE</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="/" class="nav-item" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>主控制台</span>
+                </a>
+                <a href="/api/customer-service" class="nav-item" data-page="customer">
+                    <i class="fas fa-headset"></i>
+                    <span>智能客服</span>
+                    <span class="nav-badge">新</span>
+                </a>
+                <a href="/api/rag" class="nav-item" data-page="rag">
+                    <i class="fas fa-database"></i>
+                    <span>RAG 知识库</span>
+                </a>
+                <a href="/api/mcp" class="nav-item" data-page="mcp">
+                    <i class="fas fa-plug"></i>
+                    <span>MCP 工具</span>
+                </a>
+                <a href="/api/code-helper" class="nav-item active" data-page="code">
+                    <i class="fas fa-code"></i>
+                    <span>代码助手</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="/api/settings" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="connection-status">
+                    <span class="status-dot online"></span>
+                    <span>代码助手就绪</span>
+                </div>
+                <div class="version-info">v4.0.0</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h2 class="page-title">代码助手</h2>
+                    <p class="page-subtitle">专业的编程专家，帮您解决各种代码问题</p>
+                </div>
+                <div class="header-right">
+                    <div class="code-stats">
+                        <div class="code-stat">
+                            <i class="fas fa-file-code"></i>
+                            <span id="codeSnippets">0</span>
+                            <span>代码片段</span>
+                        </div>
+                        <div class="code-stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span id="problemsSolved">0</span>
+                            <span>解决问题</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="code-container">
+                    <div class="code-sidebar" style="width: 200px;">
+                        <div class="code-section">
+                            <h3><i class="fas fa-language"></i> 语言选择</h3>
+                            <div class="language-list">
+                                <button class="language-item active" data-lang="python">
+                                    <i class="fab fa-python"></i>
+                                    Python
+                                </button>
+                                <button class="language-item" data-lang="javascript">
+                                    <i class="fab fa-js"></i>
+                                    JavaScript
+                                </button>
+                                <button class="language-item" data-lang="java">
+                                    <i class="fab fa-java"></i>
+                                    Java
+                                </button>
+                                <button class="language-item" data-lang="cpp">
+                                    <i class="fas fa-code"></i>
+                                    C++
+                                </button>
+                                <button class="language-item" data-lang="go">
+                                    <i class="fas fa-code"></i>
+                                    Go
+                                </button>
+                                <button class="language-item" data-lang="rust">
+                                    <i class="fas fa-code"></i>
+                                    Rust
+                                </button>
+                                <button class="language-item" data-lang="r">
+                                    <i class="fas fa-chart-bar"></i>
+                                    R
+                                </button>
+                                <button class="language-item" data-lang="scala">
+                                    <i class="fas fa-code"></i>
+                                    Scala
+                                </button>
+                                <button class="language-item" data-lang="typescript">
+                                    <i class="fab fa-js"></i>
+                                    TypeScript
+                                </button>
+                                <button class="language-item" data-lang="react">
+                                    <i class="fab fa-react"></i>
+                                    React
+                                </button>
+                                <button class="language-item" data-lang="sql">
+                                    <i class="fas fa-database"></i>
+                                    SQL
+                                </button>
+                                <button class="language-item" data-lang="shell">
+                                    <i class="fas fa-terminal"></i>
+                                    Shell
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="code-main-area">
+                        <div class="code-editor-section">
+                            <div class="editor-header">
+                                <div class="editor-tabs">
+                                    <button class="editor-tab active" data-tab="request">
+                                        <i class="fas fa-comment"></i>
+                                        请求
+                                    </button>
+                                    <button class="editor-tab" data-tab="code">
+                                        <i class="fas fa-code"></i>
+                                        代码
+                                    </button>
+                                    <button class="editor-tab" data-tab="output">
+                                        <i class="fas fa-terminal"></i>
+                                        输出
+                                    </button>
+                                </div>
+                                <div class="editor-actions">
+                                    <button class="icon-btn" id="analyzeCodeBtn" title="分析代码">
+                                        <i class="fas fa-search-plus"></i>
+                                    </button>
+                                    <button class="icon-btn" id="copyCodeBtn" title="复制代码">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <button class="icon-btn" id="downloadCodeBtn" title="下载代码">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="icon-btn" id="clearEditorBtn" title="清空">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-content">
+                                <div class="editor-panel active" id="requestPanel">
+                                    <textarea id="codeRequest" placeholder="描述您需要的代码功能...
+例如：写一个 Python 排序算法，包含快速排序和冒泡排序"></textarea>
+                                </div>
+                                <div class="editor-panel" id="codePanel">
+                                    <div class="code-display-wrapper">
+                                        <pre class="line-numbers"><code id="codeOutput" class="language-python"># 代码将在这里显示</code></pre>
+                                    </div>
+                                </div>
+                                <div class="editor-panel" id="outputPanel">
+                                    <div class="output-area" id="codeExecutionOutput">
+                                        <div class="output-line">等待执行...</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-footer">
+                                <div class="editor-info">
+                                    <span id="currentLang">Python</span>
+                                    <span id="codeLines">0 行</span>
+                                </div>
+                                <div class="editor-actions-footer">
+                                    <button class="btn-secondary" id="runCodeBtn">
+                                        <i class="fas fa-play"></i>
+                                        运行代码
+                                    </button>
+                                    <button class="btn-primary" id="generateCodeBtn">
+                                        <i class="fas fa-magic"></i>
+                                        生成代码
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-chat-section">
+                            <div class="chat-header">
+                                <h3><i class="fas fa-comments"></i> 代码对话</h3>
+                            </div>
+                            <div class="code-messages" id="codeMessages">
+                                <div class="code-message assistant">
+                                    <div class="code-message-avatar">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="code-message-content">
+                                        <div class="code-message-bubble">
+                                            您好！我是代码助手，有什么编程问题需要帮助吗？
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="code-input-area">
+                                <div class="code-input-wrapper">
+                                    <textarea id="codeChatInput" placeholder="关于代码的问题..." rows="1"></textarea>
+                                    <button class="code-send-btn" id="codeChatSendBtn">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script src="/static/code_helper.js"></script>
+</body>
+</html>
